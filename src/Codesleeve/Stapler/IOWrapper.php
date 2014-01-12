@@ -20,8 +20,9 @@ class IOWrapper
 		if (is_array($file)) {
 			return $this->createFromArray($file);
 		}
-
-		if (array_key_exists('scheme', parse_url($file))) {
+		
+		$url_parts = parse_url($file);
+		if (array_key_exists('scheme', $url_parts) && stristr($url_parts['scheme'], 'http')) {
 			return $this->createFromUrl($file);
 		}
 
